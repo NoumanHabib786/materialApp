@@ -8,31 +8,26 @@ import 'package:sizer/sizer.dart';
 import '../Styles/text_styles.dart';
 import 'images.dart';
 
-SizedBox black_button({var value, Function? function  , String? btn_name}) {
+SizedBox black_button(
+    {required bool load, Function? function, String? btn_name}) {
   return SizedBox(
     width: 100.w,
     height: 50,
-    child: value.load
+    child: load
         ? loading
         : ElevatedButton(
-        onPressed: () {
-          value.onLoad(true);
-          Timer(const Duration(seconds: 2), () {
-            function!();
-            value.onLoad(false);
-          });
-        },
-        style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(13))),
-        child: Text(
-          btn_name!,
-          style: txt_w500_nuito(color: Colors.white),
-        )),
+            onPressed: () => function!(),
+            style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(13))),
+            child: Text(
+              btn_name!,
+              style: txt_w500_nuito(color: Colors.white),
+            )),
   );
 }
 
-ElevatedButton button_outline(Function() function , String btn_name) {
+ElevatedButton button_outline(Function() function, String btn_name) {
   return ElevatedButton(
       onPressed: () {
         function();
@@ -41,21 +36,35 @@ ElevatedButton button_outline(Function() function , String btn_name) {
           backgroundColor: Colors.transparent,
           elevation: 0,
           shape: RoundedRectangleBorder(
-              side:  const BorderSide(width: 1, color: black),
+              side: const BorderSide(width: 1, color: mainBlack),
               borderRadius: BorderRadius.circular(20))),
       child: Text(
         btn_name,
         style: txt_simple_nunito(fontSize: 11.sp),
       ));
 }
-ElevatedButton button_fill(BuildContext context , String btn_name , Function function) {
+
+ElevatedButton button_fill(
+    BuildContext context, String btn_name, Function function) {
   return ElevatedButton(
       style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))
-      ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
       onPressed: () {
         function();
       },
-      child: Text(btn_name,style: txt_simple_nunito(color: Colors.white),));
+      child: Text(
+        btn_name,
+        style: txt_simple_nunito(color: Colors.white),
+      ));
 }
 
+bottomCotainer({required BuildContext context, required Widget child}) {
+  return Container(
+      margin: EdgeInsets.all(2.h),
+      child: SizedBox(
+        width: 100.w,
+        height: 5.h,
+        child: child,
+      ));
+}

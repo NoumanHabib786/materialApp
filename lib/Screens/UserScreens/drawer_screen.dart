@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:material_app/Screens/UserScreens/ServicesList.dart';
+import 'package:material_app/Screens/UserScreens/profileScreen.dart';
 import 'package:material_app/Screens/UserScreens/sign_in.dart';
-import 'package:material_app/Screens/UserScreens/tools_category.dart';
+import 'package:material_app/Screens/toolsScreens/tools_category.dart';
 import 'package:material_app/Styles/text_styles.dart';
 import 'package:material_app/Widgets/firebase_variables.dart';
 import 'package:material_app/Widgets/images.dart';
@@ -19,9 +22,12 @@ class Drawer_Screen extends StatefulWidget {
 class _Drawer_ScreenState extends State<Drawer_Screen> {
   List drawer_list = [
     ["Construction Tools", tools],
-    ["Construction Material", material],
-    ["Services", services]
+    // ["Construction Material", material],
+    ["Services", services],
+    // ["Become vendor", services],
+    ["Profile", services],
   ];
+  FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -50,25 +56,25 @@ class _Drawer_ScreenState extends State<Drawer_Screen> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 3.h,
-                      child: Text(
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.center,
-                        "Nouman Mughal ",
-                        style: txt_w500_mont(),
-                      ),
-                    ),
-                    height(0.5),
+                    // SizedBox(
+                    //   height: 3.h,
+                    //   child: Text(
+                    //     maxLines: 1,
+                    //     overflow: TextOverflow.ellipsis,
+                    //     textAlign: TextAlign.center,
+                    //     "Nouman Mughal ",
+                    //     style: txt_w500_mont(),
+                    //   ),
+                    // ),
+                    height(3),
                     SizedBox(
                       height: 4.h,
                       child: Text(
                         maxLines: 1,
                         textAlign: TextAlign.center,
-                        user == null
+                        auth.currentUser == null
                             ? "nouman@gmail.com"
-                            : user!.email.toString(),
+                            : auth.currentUser!.email.toString(),
                         style: txt_simple_mont(),
                       ),
                     ),
@@ -92,12 +98,22 @@ class _Drawer_ScreenState extends State<Drawer_Screen> {
                         child: ListTile(
                           onTap: () {
                             setState(() {
-                              if(index ==0)
-                                {
-                                  Navigator.pop(context);
-                                  navigate_push(context: context, next_Screen: ToolsCategory());
-                                }
-
+                              if (index == 0) {
+                                Navigator.pop(context);
+                                navigate_push(
+                                    context: context,
+                                    next_Screen: const ToolsCategory());
+                              } else if (index == 2) {
+                                Navigator.pop(context);
+                                navigate_push(
+                                    context: context,
+                                    next_Screen: const ProfileScreen());
+                              } else if (index == 1) {
+                                Navigator.pop(context);
+                                navigate_push(
+                                    context: context,
+                                    next_Screen: const ServicesList());
+                              }
                             });
                           },
                           minLeadingWidth: 10,
@@ -118,7 +134,7 @@ class _Drawer_ScreenState extends State<Drawer_Screen> {
               onTap: () {
                 auth.signOut();
                 navigate_remove_untill(
-                    context: context, next_Screen: SignInScreen());
+                    context: context, next_Screen: const SignInScreen());
               },
               child: Card(
                 color: Colors.black,

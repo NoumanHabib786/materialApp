@@ -7,9 +7,8 @@ import 'package:flutter/cupertino.dart';
 
 class Functions_Provider with ChangeNotifier {
   bool load = false;
-
-  onLoad(bool set_load) {
-    load = set_load;
+  onLoad(bool setLoad) {
+    load = setLoad;
     notifyListeners();
   }
 

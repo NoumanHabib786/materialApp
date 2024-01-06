@@ -5,25 +5,25 @@ import 'package:material_app/Widgets/sized_box.dart';
 import 'package:sizer/sizer.dart';
 
 Container list_category({List? list, Function(int value)? function}) {
-  return Container(
+  return    Container(
     alignment: Alignment.center,
     height: 15.h,
     width: 100.w,
-    // color: Colors.black.withOpacity(0.1),
     child: ListView.builder(
       scrollDirection: Axis.horizontal,
-      itemCount: list!.length < 8 ? list.length : 8,
+      itemCount: list!.length < 8
+          ? list.length
+          : 8,
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, index) {
         return InkWell(
-          onTap: () {
-            function!(index);
-          },
+          onTap: () => function!(index),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 10),
+                margin:
+                const EdgeInsets.symmetric(horizontal: 10),
                 padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
                     color: Colors.grey.withOpacity(0.2),
@@ -33,16 +33,16 @@ Container list_category({List? list, Function(int value)? function}) {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: Image.asset(
-                    list[index][1],
+                    list[index].Timage!,
                     height: 35,
                   ),
                 ),
               ),
-              Container(
-                  // alignment: Alignment.centerLeft,
+              SizedBox(
+                // alignment: Alignment.centerLeft,
                   width: 100,
                   child: Text(
-                    list[index][0],
+                    list[index].Tname!,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,

@@ -1,18 +1,11 @@
-import 'dart:async';
-
 import 'package:material_app/Screens/UserScreens/sign_in.dart';
-import 'package:material_app/Screens/UserScreens/sign_up.dart';
-import 'package:material_app/Styles/colors.dart';
 import 'package:material_app/Styles/text_styles.dart';
 import 'package:material_app/Widgets/button.dart';
 import 'package:material_app/Widgets/navigators.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-
-import '../Providers/functions.dart';
 
 class OnBordingScreen extends StatefulWidget {
   const OnBordingScreen({Key? key}) : super(key: key);
